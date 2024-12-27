@@ -33,7 +33,7 @@
 defined ("ALEXSOFT_RUN_CMS") or die("Prohibition of Access.");
 
 
-global $cms_site, $objDatabase;
+global $cms_site, $objDatabase, $my;
 
 $show_icon = $block->getParam('bool', 'show_icon', false);
 $show_total = $block->getParam('bool', 'show_total', false);
@@ -84,10 +84,13 @@ $objDatabase->setSQLQuery($query);
 $users_online_count = $objDatabase->getResult();
 unset($query);
 
-$query = "SELECT userid, username FROM #__session WHERE client=0 AND guest=2 LIMIT ".$count;
-$objDatabase->setSQLQuery($query);
-$users_online = $objDatabase->getRows();
-unset($query);	
+if ($show_users AND ($my->groupid >= 9999) )
+{
+	$query = "SELECT userid, username FROM #__session WHERE client=0 AND guest=2 LIMIT ".$count;
+	$objDatabase->setSQLQuery($query);
+	$users_online = $objDatabase->getRows();
+	unset($query);
+}	
 
 
 $text = '';
@@ -107,7 +110,7 @@ if ($show_total) {
 
 if ($show_guests) {
 	$text .= "<div class=\"row\">";
-	if ($show_icon) $text .= "<div class=\"cell\"><img src=\"".$cms_site."/themes/blocks/fronts/online_users/$theme/users_guest.png\" alt=\"".$block->getLangVar('guests_online')."\" border=\"0\" /></div>";
+	if ($show_icon) $text .= "<div class=\"cell\"><img src=\"".$cms_site."/themes/blocks/fronts/online_users/$theme/users_guest.png\" alt=\"".$block->getLangVar('guests')."\" border=\"0\" /></div>";
 	$text .= "<div class=\"cell\">".$block->getLangVar('guests')."</div>";
 	$text .= "<div class=\"cell right\">".$guests."</div>";
 	$text .= "</div>";
