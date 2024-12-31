@@ -7,22 +7,22 @@
  * 
  * 
  ************************************************************************************
- * @ASCOOS-NAME        	: ASCOOS CMS 24'                                            *
- * @ASCOOS-VERSION     	: 24.0.0                                                    *
+ * @ASCOOS-NAME        	: ASCOOS CMS 25'                                            *
+ * @ASCOOS-VERSION     	: 25.0.0                                                    *
  * @ASCOOS-CATEGORY    	: Block (Frontend and Administrator Side)                   *
  * @ASCOOS-CREATOR     	: Drogidis Christos                                         *
  * @ASCOOS-SITE        	: www.ascoos.com                                            *
  * @ASCOOS-LICENSE     	: [Commercial] http://docs.ascoos.com/lics/ascoos/AGL.html  *
- * @ASCOOS-COPYRIGHT   	: Copyright (c) 2007 - 2024, AlexSoft Software.             *
+ * @ASCOOS-COPYRIGHT   	: Copyright (c) 2007 - 2025, AlexSoft Software.             *
  ************************************************************************************
  *
  * @package            	: Block Manager - Online Website users
  * @subpackage         	: Afrikaans Language file
  * @source             	: /[BLOCKS PATH]/online_users/languages/af-ZA.php
  * @fileNo             	: 
- * @version            	: 1.0.2
+ * @version            	: 1.0.3
  * @created            	: 2007-05-01 20:00:00 UTC+3
- * @updated            	: 2024-12-10 07:00:00 UTC+3
+ * @updated            	: 2025-01-01 00:00:00 UTC+3
  * @author             	: Drogidis Christos
  * @authorSite         	: www.alexsoft.gr
  * @translator         	:

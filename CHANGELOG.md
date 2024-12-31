@@ -1,3 +1,8 @@
+## [1.0.3] - 2024-12-10
+🔄 Updates files for run on Ascoos Cms 25'
+
+***
+
 ## [1.0.2] - 2024-12-10
 
 ### FOR SUPPORT PHP >= 8.2.0

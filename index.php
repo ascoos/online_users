@@ -7,22 +7,22 @@
  * 
  * 
  ************************************************************************************
- * @ASCOOS-NAME        	: ASCOOS CMS 24'                                            *
- * @ASCOOS-VERSION     	: 24.0.0                                                    *
+ * @ASCOOS-NAME        	: ASCOOS CMS 25'                                            *
+ * @ASCOOS-VERSION     	: 25.0.0                                                    *
  * @ASCOOS-CATEGORY    	: Block (Frontend and Administrator Side)                   *
  * @ASCOOS-CREATOR     	: Drogidis Christos                                         *
  * @ASCOOS-SITE        	: www.ascoos.com                                            *
  * @ASCOOS-LICENSE     	: [Commercial] http://docs.ascoos.com/lics/ascoos/AGL.html  *
- * @ASCOOS-COPYRIGHT   	: Copyright (c) 2007 - 2024, AlexSoft Software.             *
+ * @ASCOOS-COPYRIGHT   	: Copyright (c) 2007 - 2025, AlexSoft Software.             *
  ************************************************************************************
  *
  * @package            	: Block Manager - Online Website users
  * @subpackage         	: Main Frontend file
  * @source             	: /[BLOCKS PATH]/online_users/index.php
  * @fileNo             	: 
- * @version            	: 1.0.2
+ * @version            	: 1.0.3
  * @created            	: 2007-05-01 20:00:00 UTC+3
- * @updated            	: 2024-12-10 07:00:00 UTC+3
+ * @updated            	: 2025-01-01 00:00:00 UTC+3
  * @author             	: Drogidis Christos
  * @authorSite         	: www.alexsoft.gr
  * @license 			: AGL-F
@@ -51,7 +51,6 @@ if ($show_total) {
 	$query = "SELECT count(id) FROM #__session WHERE client=0";
 	$objDatabase->setSQLQuery($query);
 	$total_online = $objDatabase->getResult();
-	unset($query);
 }
 
 // How many of them are ordinary visitors?
@@ -59,7 +58,6 @@ if ($show_guests) {
 	$query = "SELECT count(id) FROM #__session WHERE client=0 AND guest=0";
 	$objDatabase->setSQLQuery($query);
 	$guests = $objDatabase->getResult();
-	unset($query);
 }
 
 // How many of them are search engines?
@@ -67,7 +65,6 @@ if ($show_robots) {
 	$query = "SELECT count(id) FROM #__session WHERE client=0 AND guest=1";
 	$objDatabase->setSQLQuery($query);
 	$robots = $objDatabase->getResult();
-	unset($query);
 }
 
 // How many connections are blocked?
@@ -75,23 +72,20 @@ if ($show_blocks) {
 	$query = "SELECT count(id) FROM #__ass_ban";
 	$objDatabase->setSQLQuery($query);
 	$blocks = $objDatabase->getResult();
-	unset($query);
 }
 
 // How many of them are registered members?
 $query = "SELECT count(userid) FROM #__session WHERE client=0 AND guest=2";
 $objDatabase->setSQLQuery($query);
 $users_online_count = $objDatabase->getResult();
-unset($query);
 
 if ($show_users AND ($my->groupid >= 9999) )
 {
 	$query = "SELECT userid, username FROM #__session WHERE client=0 AND guest=2 LIMIT ".$count;
 	$objDatabase->setSQLQuery($query);
 	$users_online = $objDatabase->getRows();
-	unset($query);
 }	
-
+if (isset($query)) unset($query);
 
 $text = '';
 $text .= "<div class=\"block-online_users-".$theme."\">";
@@ -142,10 +136,7 @@ if ($show_users AND ($my->groupid >= 9999) )
 	$uuo = implode(',&nbsp;&nbsp;', $uo);
 	$uuo = ($users_online_count > $count) ? $uuo.'...' : $uuo;
 } else {
-	if ($users_online_count > 0)
-		$uuo = $block->getLangVar('login_to_see_users');
-	else
-		$uuo = $block->getLangVar('no_registered_users');
+	$uuo = ($users_online_count > 0) ? $block->getLangVar('login_to_see_users') : $block->getLangVar('no_registered_users');
 }
 $text .= "<div class=\"row\">";
 if ($show_icon) $text .= "<div class=\"cell\"><img src=\"".$cms_site."/themes/blocks/fronts/online_users/$theme/users_registered.png\" alt=\"".$block->getLangVar('registered_users')."\" border=\"0\" /></div>";
@@ -155,7 +146,8 @@ $text .= "</div>";
 
 
 $text .= "</div></div>";
-$text .= "<div class=\"more\"><a href=\"https://www.ascoos.com\"><strong>ASCOOS CMS</strong></a></div>";
+// If is Free Edition of Ascoos Cms.
+if (!ASCOOS_CMS_IS_COMMERCIAL_EDITION) $text .= "<div class=\"more\"><a href=\"https://www.ascoos.com\"><strong>ASCOOS CMS</strong></a></div>";
 $text .= "</div>";
+
 echo $text;
-?>
