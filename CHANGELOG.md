@@ -1,5 +1,5 @@
-## [1.0.3] - 2024-12-10
-🔄 Updates files for run on Ascoos Cms 25'
+## [1.0.3] - 2025-01-01
+- Updates files for run on Ascoos Cms 25'
 
 ***
 
